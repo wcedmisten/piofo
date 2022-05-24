@@ -27,7 +27,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Install apt dependencies
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg exiftool
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg=7:4.4.1-3ubuntu5 libimage-exiftool-perl=12.40+dfsg-1
 
       # Runs a set of commands using the runners shell
       - name: Run tests
