@@ -1,4 +1,4 @@
-# pyofo
+# piofo
 A Python library for extracting GPS data / images from Viofo dashcam videos.
 
 # Original Sources:
