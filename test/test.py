@@ -12,7 +12,7 @@ class TestScript(unittest.TestCase):
     def test_img1(self):
         subprocess.call(
             [
-                f"{THIS_DIR}/../dashcam2josm.sh",
+                f"{THIS_DIR}/../src/dashcam2josm.sh",
                 "test/data/small_dashcam.MP4",
             ],
             # suppress stdout and stderr from ffmpeg

@@ -26,6 +26,8 @@ skew=${2:-0.0}
 
 ext='.jpg'
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]:-$0}"; )" &> /dev/null && pwd 2> /dev/null;)
+
 #
 #   truncate a positive floating point bc number to integer
 #
@@ -128,7 +130,7 @@ rm -rf "${outname}"
 mkdir -p "${outname}"
 rm -rf "${outname}/*${ext}"
 cp -p "${path}" "${outname}/${fname}"
-./nvtk_mp42gpx.py "-i${outname}/${fname}" "-o${gpx}" -f
+${SCRIPT_DIR}/nvtk_mp42gpx.py "-i${outname}/${fname}" "-o${gpx}" -f
 
 #
 #  For each time stamp in the GPX file, compute the starting offset in
