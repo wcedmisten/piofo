@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.0"
+	creator="Sergei's Novatek MP4 GPS parser"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.topografix.com/GPX/1/0"
+	xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
+	<name>small_dashcam/small_dashcam.gpx</name>
+	<url>sergei.nz</url>
+	<trk><name>small_dashcam/small_dashcam.gpx</name><trkseg>
+		<trkpt lat="38.067253" lon="-78.485986"><time>2022-05-18T17:08:08Z</time><speed>0.030867</speed><course>65.870003</course></trkpt>
+		<trkpt lat="38.067253" lon="-78.485986"><time>2022-05-18T17:08:08Z</time><speed>0.030867</speed><course>65.870003</course></trkpt>
+		<trkpt lat="38.067244" lon="-78.485994"><time>2022-05-18T17:08:10Z</time><speed>0.036011</speed><course>65.870003</course></trkpt>
+		<trkpt lat="38.067240" lon="-78.485994"><time>2022-05-18T17:08:11Z</time><speed>0.020578</speed><course>65.870003</course></trkpt>
+		<trkpt lat="38.067240" lon="-78.485994"><time>2022-05-18T17:08:12Z</time><speed>0.015433</speed><course>65.870003</course></trkpt>
+		<trkpt lat="38.067240" lon="-78.485994"><time>2022-05-18T17:08:13Z</time><speed>0.005144</speed><course>65.870003</course></trkpt>
+		<trkpt lat="38.067240" lon="-78.485994"><time>2022-05-18T17:08:14Z</time><speed>0.010289</speed><course>65.870003</course></trkpt>
+	</trkseg></trk>
+</gpx>

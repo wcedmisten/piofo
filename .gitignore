@@ -1,0 +1,7 @@
+*.jpg
+*.jpg_original
+*.gpx
+!test/data/*.jpg
+!test/data/*.gpx
+__pycache__
+.vscode
