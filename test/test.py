@@ -19,6 +19,14 @@ class TestScript(unittest.TestCase):
             # stdout=subprocess.DEVNULL,
             # stderr=subprocess.DEVNULL,
         )
+        self.assertTrue(
+            filecmp.cmp(
+                f"{THIS_DIR}/data/small_dashcam.gpx",
+                f"{THIS_DIR}/../small_dashcam/small_dashcam.gpx",
+            ),
+            "GPX file did not match standard data",
+        )
+
         # self.assertEqual(THIS_DIR, "")
         self.assertTrue(
             filecmp.cmp(
@@ -34,14 +42,6 @@ class TestScript(unittest.TestCase):
                 f"{THIS_DIR}/../small_dashcam/small_dashcam_007.jpg",
             ),
             "7th image did not match standard data.",
-        )
-
-        self.assertTrue(
-            filecmp.cmp(
-                f"{THIS_DIR}/data/small_dashcam.gpx",
-                f"{THIS_DIR}/../small_dashcam/small_dashcam.gpx",
-            ),
-            "GPX file did not match standard data",
         )
 
 
