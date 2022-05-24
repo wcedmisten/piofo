@@ -159,7 +159,7 @@ do
         f="${outname}/${outname}_${padded_fnum}${ext}"
         echo "File=\"${f}\", Time=\"${time}\", Sec=${s}, Delta=${delta}, ss=\"${ss}\""
 
-        ffmpeg -ss "${ss}" -i "${outname}/${fname}" -frames:v 1 -qscale:v 1 "${f}"
+        ffmpeg -bitexact -ss "${ss}" -i "${outname}/${fname}" -frames:v 1 -qscale:v 1 "${f}"
         exiftool -CreateDate="${time}" -DateTimeOriginal="${time}" -FileModifyDate="${time}" ${f}
         fnum=$(( $fnum + 1 ))
     fi
