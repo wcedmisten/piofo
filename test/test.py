@@ -16,8 +16,8 @@ class TestScript(unittest.TestCase):
                 "test/data/small_dashcam.MP4",
             ],
             # suppress stdout and stderr from ffmpeg
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
+            # stdout=subprocess.DEVNULL,
+            # stderr=subprocess.DEVNULL,
         )
         # self.assertEqual(THIS_DIR, "")
         self.assertTrue(
