@@ -1,0 +1,6 @@
+# action.yml
+name: 'End to End Test'
+description: 'Runs and end to end test from dashcam footage to tagged jpegs'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
