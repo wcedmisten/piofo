@@ -1,6 +1,10 @@
 # piofo
 A Python library for extracting GPS data / images from Viofo dashcam videos.
 
+# Testing
+
+python3 -m unittest test/test.py
+
 # Original Sources:
 
 https://retiredtechie.fitchfamily.org/2018/05/13/dashcam-openstreetmap-mapping/
