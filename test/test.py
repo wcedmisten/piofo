@@ -1,7 +1,9 @@
 import unittest
 import subprocess
-import filecmp
 import os
+
+import gpxpy
+import datetime
 
 from PIL import Image
 
@@ -13,7 +15,9 @@ print(THIS_DIR)
 
 
 class TestScript(unittest.TestCase):
-    def test_img1(self):
+    @classmethod
+    def setUpClass(cls):
+        super(TestScript, cls).setUpClass()
         subprocess.call(
             [
                 f"{THIS_DIR}/../src/dashcam2josm.sh",
@@ -24,14 +28,78 @@ class TestScript(unittest.TestCase):
             stderr=subprocess.DEVNULL,
         )
 
-        self.assertTrue(
-            filecmp.cmp(
-                f"{THIS_DIR}/data/small_dashcam.gpx",
-                f"{THIS_DIR}/../small_dashcam/small_dashcam.gpx",
-            ),
-            "GPX file did not match standard data",
-        )
+    def test_gpx(self):
+        with open(f"{THIS_DIR}/../small_dashcam/small_dashcam.gpx", "r") as gpx_file:
+            gpx = gpxpy.parse(gpx_file)
 
+            expected_points = [
+                {
+                    "latitude": 38.067253,
+                    "longitude": -78.485986,
+                    "time": datetime.datetime(
+                        2022, 5, 18, 17, 8, 8, tzinfo=datetime.timezone.utc
+                    ),
+                },
+                {
+                    "latitude": 38.067253,
+                    "longitude": -78.485986,
+                    "time": datetime.datetime(
+                        2022, 5, 18, 17, 8, 8, tzinfo=datetime.timezone.utc
+                    ),
+                },
+                {
+                    "latitude": 38.067244,
+                    "longitude": -78.485994,
+                    "time": datetime.datetime(
+                        2022, 5, 18, 17, 8, 10, tzinfo=datetime.timezone.utc
+                    ),
+                },
+                {
+                    "latitude": 38.06724,
+                    "longitude": -78.485994,
+                    "time": datetime.datetime(
+                        2022, 5, 18, 17, 8, 11, tzinfo=datetime.timezone.utc
+                    ),
+                },
+                {
+                    "latitude": 38.06724,
+                    "longitude": -78.485994,
+                    "time": datetime.datetime(
+                        2022, 5, 18, 17, 8, 12, tzinfo=datetime.timezone.utc
+                    ),
+                },
+                {
+                    "latitude": 38.06724,
+                    "longitude": -78.485994,
+                    "time": datetime.datetime(
+                        2022, 5, 18, 17, 8, 13, tzinfo=datetime.timezone.utc
+                    ),
+                },
+                {
+                    "latitude": 38.06724,
+                    "longitude": -78.485994,
+                    "time": datetime.datetime(
+                        2022, 5, 18, 17, 8, 14, tzinfo=datetime.timezone.utc
+                    ),
+                },
+            ]
+
+            points = []
+
+            for track in gpx.tracks:
+                for segment in track.segments:
+                    for point in segment.points:
+                        points.append(
+                            {
+                                "latitude": point.latitude,
+                                "longitude": point.longitude,
+                                "time": point.time,
+                            }
+                        )
+
+            self.assertEqual(expected_points, points)
+
+    def test_image1(self):
         image1 = Image.open(f"{THIS_DIR}/../small_dashcam/small_dashcam_001.jpg")
         image1.verify()
 
@@ -50,6 +118,7 @@ class TestScript(unittest.TestCase):
             get_geotagging(image1._getexif()),
         )
 
+    def test_img7(self):
         image7 = Image.open(f"{THIS_DIR}/../small_dashcam/small_dashcam_007.jpg")
         image7.verify()
 
@@ -69,7 +138,8 @@ class TestScript(unittest.TestCase):
         )
 
     # cleanup files
-    def tearDown(self):
+    @classmethod
+    def tearDownClass(cls):
         os.remove(f"{THIS_DIR}/../small_dashcam/small_dashcam.gpx")
 
         for i in range(1, 8):
