@@ -139,36 +139,38 @@ ${SCRIPT_DIR}/nvtk_mp42gpx.py "-i${outname}/${fname}" "-o${gpx}" -f
 #
 createTime=-1000
 fnum=1
-for ts in `grep "time>.*Z" -o ${gpx} | sed 's/time>//' | sed 's/Z//' | sed 's/-/:/g' `
-do
-    padded_fnum=`printf "%03d" $fnum`
-    time=`echo "${ts}" | sed 's/T/ /'`
-    s=$(seconds "${time#* }")
-    if [ $(trunc $createTime) -lt -100 ]
-    then
-        createTime=$( echo "scale=4; (${s} + ${skew} - 1.0000)/1" | bc -l )
-        echo "GPS time=${s}, skew=${skew}, createTime => ${createTime}"
-    fi
 
-    delta=$(echo "scale=4; $s - $createTime" | bc -l)
-    echo "delta = ${delta}"
+ffmpeg -i "${outname}/${fname}" -qscale:v 1 -vf "crop=2560:1395:0:0" -r 1 "${outname}/${outname}_%03d.jpg"
 
-    if [[ ${delta:0:1} != "-" ]]
-    then
-        ss=$(hms $delta)
-        f="${outname}/${outname}_${padded_fnum}${ext}"
-        echo "File=\"${f}\", Time=\"${time}\", Sec=${s}, Delta=${delta}, ss=\"${ss}\""
+# for ts in `grep "time>.*Z" -o ${gpx} | sed 's/time>//' | sed 's/Z//' | sed 's/-/:/g' `
+# do
+#     padded_fnum=`printf "%03d" $fnum`
+#     time=`echo "${ts}" | sed 's/T/ /'`
+#     s=$(seconds "${time#* }")
+#     if [ $(trunc $createTime) -lt -100 ]
+#     then
+#         createTime=$( echo "scale=4; (${s} + ${skew} - 1.0000)/1" | bc -l )
+#         echo "GPS time=${s}, skew=${skew}, createTime => ${createTime}"
+#     fi
 
-        ffmpeg -bitexact -ss "${ss}" -i "${outname}/${fname}" -frames:v 1 -qscale:v 1 "${f}"
-        exiftool -CreateDate="${time}" -DateTimeOriginal="${time}" -FileModifyDate="${time}" ${f}
-        fnum=$(( $fnum + 1 ))
-    fi
-done
+#     delta=$(echo "scale=4; $s - $createTime" | bc -l)
+#     echo "delta = ${delta}"
+
+#     if [[ ${delta:0:1} != "-" ]]
+#     then
+#         ss=$(hms $delta)
+#         f="${outname}/${outname}_${padded_fnum}${ext}"
+#         echo "File=\"${f}\", Time=\"${time}\", Sec=${s}, Delta=${delta}, ss=\"${ss}\""
+        
+#         exiftool -CreateDate="${time}" -DateTimeOriginal="${time}" -FileModifyDate="${time}" ${f}
+#         fnum=$(( $fnum + 1 ))
+#     fi
+# done
 
 #
 #  Tag the extracted images with the GPS location per the GPX file
 #
-exiftool -geotag "${gpx}" "-Geotime<DateTimeOriginal" -P ${outname}/${outname}*${ext}
+# exiftool -geotag "${gpx}" "-Geotime<DateTimeOriginal" -P ${outname}/${outname}*${ext}
 
 #
 #   Clean up after ourselves
