@@ -98,45 +98,6 @@ class TestScript(unittest.TestCase):
                         )
 
             self.assertEqual(expected_points, points)
-
-    def test_image1(self):
-        image1 = Image.open(f"{THIS_DIR}/../small_dashcam/small_dashcam_001.jpg")
-        image1.verify()
-
-        self.assertEqual(
-            {
-                "GPSDateStamp": "2022:05:18",
-                "GPSImgDirection": 65.87000296120817,
-                "GPSImgDirectionRef": "T",
-                "GPSLatitude": (38.0, 4.0, 2.1108),
-                "GPSLatitudeRef": "N",
-                "GPSLongitude": (78.0, 29.0, 9.5496),
-                "GPSLongitudeRef": "W",
-                "GPSTimeStamp": (17.0, 8.0, 8.0),
-                "GPSVersionID": b"\x02\x03\x00\x00",
-            },
-            get_geotagging(image1._getexif()),
-        )
-
-    def test_img7(self):
-        image7 = Image.open(f"{THIS_DIR}/../small_dashcam/small_dashcam_007.jpg")
-        image7.verify()
-
-        self.assertEqual(
-            {
-                "GPSDateStamp": "2022:05:18",
-                "GPSImgDirection": 65.87000296120817,
-                "GPSImgDirectionRef": "T",
-                "GPSLatitude": (38.0, 4.0, 2.064),
-                "GPSLatitudeRef": "N",
-                "GPSLongitude": (78.0, 29.0, 9.5784),
-                "GPSLongitudeRef": "W",
-                "GPSTimeStamp": (17.0, 8.0, 14.0),
-                "GPSVersionID": b"\x02\x03\x00\x00",
-            },
-            get_geotagging(image7._getexif()),
-        )
-
     # cleanup files
     @classmethod
     def tearDownClass(cls):
