@@ -3,7 +3,9 @@ import glob
 
 import keras_ocr
 
-OUTPATH="/home/wedmisten/piofo/20220531181027_004969"
+OUTPATH="/home/wedmisten/piofo/20220605145527_005152"
+
+BATCH_SIZE = 4 # number of images to process at once
 
 pipeline = keras_ocr.pipeline.Pipeline(scale=1)
 
@@ -18,7 +20,7 @@ def chunks(lst, n):
 
 data = {}
 
-for group in chunks(images, 6):
+for group in chunks(images, BATCH_SIZE):
     images = [
         keras_ocr.tools.read(url) for url in group
     ]
@@ -31,4 +33,4 @@ for group in chunks(images, 6):
         data[filename] = list(map(lambda pred: pred[0], prediction))
 
 with open(f"{OUTPATH}/ocr.json", 'w') as f:
-    json.dump(data, f)
+    json.dump(data, f, indent=2)
