@@ -17,7 +17,7 @@
 #
 #   Also uses ffmpeg and exiftool.
 
-set -e
+set -ex
 
 src=${1}
 skew=${2:-0.0}

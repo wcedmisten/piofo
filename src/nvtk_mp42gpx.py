@@ -46,7 +46,7 @@ def check_in_file(in_file):
     return in_files
 
 
-def get_args():
+def get_args(raw_args):
     """ parsing arguments """
     parser = argparse.ArgumentParser(
         description=('This script will attempt to extract GPS data'
@@ -72,7 +72,11 @@ def get_args():
                               'The \'-s d\' will sort the output by the GPS date (default). '
                               'The \'-s n\' will not sort the output.'))
     try:
-        args = parser.parse_args(sys.argv[1:])
+        if raw_args:
+            args = parser.parse_args(raw_args)
+        else:
+            args = parser.parse_args(sys.argv[1:])
+        
         force = args.f
 
         sort_by = args.s
@@ -565,9 +569,9 @@ def sort_gps_data_by_dt(gps_data):
     return gps_data
 
 
-def main():
+def main(raw_args=None):
     """ main function """
-    in_files, out_file, force, multiple, deobfuscate, sort_by, del_outliers = get_args()
+    in_files, out_file, force, multiple, deobfuscate, sort_by, del_outliers = get_args(raw_args)
     gps_data = []
     success = False
     if sort_by == 'f':
