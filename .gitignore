@@ -5,3 +5,4 @@
 !test/data/*.gpx
 __pycache__
 .vscode
+workspace/*
