@@ -7,8 +7,17 @@ import psycopg2
 import psycopg2.extras
 import json
 
+from Levenshtein import distance
+
 from PIL import Image
 
+def is_speed_limit_sign(ocr_detections):
+    """Returns True if an ocr detection looks similar to `speed` or `limit`, determined via Levenshtein distance
+    This helps acomodate for poor OCR, resulting in mutation errors in the text."""
+    for word in ocr_detections:
+        if distance(word, "speed") <= 1 or distance(word, "limit") <= 1:
+            return True
+    return False
 
 def search_osm(FILE_NAME, WORKING_DIR, GPX_FILE):
     # get a list of coordinates from the GPX file
@@ -60,7 +69,7 @@ def search_osm(FILE_NAME, WORKING_DIR, GPX_FILE):
 
 
     for key, item in ocr_data.items():
-        if 'limit' in item['ocr'] or 'speed' in item['ocr']:
+        if is_speed_limit_sign(item['ocr']):
             lat, lon = item['latlon']
             
             # Execute a query
