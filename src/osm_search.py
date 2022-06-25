@@ -53,7 +53,7 @@ def search_osm(FILE_NAME, WORKING_DIR, GPX_FILE):
 
     osm_query = """SELECT osm_id, name, maxspeed, highway, 
     way <-> ST_Transform(ST_GeomFromText('POINT(%s %s)',4326),3857) AS dist
-    FROM planet_osm_roads
+    FROM planet_osm_line
     WHERE highway IS NOT NULL
     ORDER BY dist
     LIMIT 1;"""

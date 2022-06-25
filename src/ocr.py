@@ -1,11 +1,8 @@
 import json
 import glob
-
 import os
 
 import keras_ocr
-
-# OUTPATH="/home/wedmisten/piofo/20220605145527_005152"
 
 
 def run_ocr(OUTPATH, BATCH_SIZE=4):
