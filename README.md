@@ -3,7 +3,9 @@ A Python library for extracting GPS data / images from Viofo dashcam videos.
 
 # Requirements
 
+* a GPU
 * ffmpeg
+* pip
 
 # Install Dependencies
 
@@ -14,6 +16,12 @@ sudo apt-get install ffmpeg
 ```bash
 pip install -r requirements.txt
 ```
+
+Install the CUDA toolkit: 
+
+https://developer.nvidia.com/cuda-downloads
+
+This may require you to change your nvidia driver versions. CUDA is needed for running the OCR model on the imagery.
 
 # Setting up PostGIS with OSM data
 
