@@ -1,0 +1,6 @@
+gpxplotter
+gpxpy
+keras-ocr
+tensorflow
+psycopg2
+python-Levenshtein
