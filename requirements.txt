@@ -1,6 +1,7 @@
 gpxplotter
 gpxpy
-keras-ocr
+easy-ocr
 tensorflow
 psycopg2
 python-Levenshtein
+scikit-learn

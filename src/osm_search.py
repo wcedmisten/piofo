@@ -55,7 +55,7 @@ def search_osm(FILE_NAME, WORKING_DIR, GPX_FILE):
 
 
     # Connect to your postgres DB
-    conn = psycopg2.connect("host=localhost dbname=postgres user=postgres port=5432 password=password")
+    conn = psycopg2.connect("host=localhost dbname=postgres user=postgres port=15432 password=password")
 
     # Open a cursor to perform database operations
     cur = conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)

@@ -5,8 +5,8 @@ import json
 import gpxpy
 import gpxpy.gpx
 
-FILE_NAME = '20220605145527_005152'
-WORKING_DIR = f'/home/wedmisten/piofo/{FILE_NAME}'
+FILE_NAME = '20230125125339_000791'
+WORKING_DIR = f'/home/wcedmisten/repos/piofo/workspace/{FILE_NAME}'
 
 GPX_FILE = f'{WORKING_DIR}/{FILE_NAME}.gpx'
 

@@ -38,10 +38,18 @@ def main(input_mp4):
 
     video_workspace = f"{WORKSPACE_DIR}/{fname_base}"
 
+    if not os.path.exists(WORKSPACE_DIR):
+        os.makedirs(WORKSPACE_DIR)
+
+    if not os.path.exists(video_workspace):
+        os.makedirs(video_workspace)
+
     gpx_filename = f'{video_workspace}/{fname_base}.gpx'
 
     # step 1, create the GPX and JPG files
     create_gpx_and_jpg(input_mp4, gpx_filename, video_workspace, fname_base)
+
+    print("===========================")
 
     # step 2, run OCR on the images
     ocr.run_ocr(video_workspace)

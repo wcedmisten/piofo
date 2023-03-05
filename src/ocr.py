@@ -2,15 +2,14 @@ import json
 import glob
 import os
 
-import keras_ocr
+import easyocr
+reader = easyocr.Reader(['en']) # this needs to run only once to load the model into memory
 
 
-def run_ocr(OUTPATH, BATCH_SIZE=4):
+def run_ocr(OUTPATH, BATCH_SIZE=2):
     if os.path.exists(f"{OUTPATH}/ocr.json"):
         return
     else:
-        pipeline = keras_ocr.pipeline.Pipeline(scale=1)
-
         images = glob.glob(f"{OUTPATH}/*.jpg")
 
         print("Running OCR on ", len(images), "images")
@@ -24,15 +23,15 @@ def run_ocr(OUTPATH, BATCH_SIZE=4):
 
         for group in chunks(images, BATCH_SIZE):
             images = [
-                keras_ocr.tools.read(url) for url in group
+                url for url in group
             ]
 
             # Each list of predictions in prediction_groups is a list of
             # (word, box) tuples.
-            prediction_groups = pipeline.recognize(images)
+            prediction_groups = reader.readtext_batched(images)
 
             for filename, prediction in zip(group, prediction_groups):
-                data[filename] = list(map(lambda pred: pred[0], prediction))
+                data[filename] = list(map(lambda pred: pred[1], prediction))
 
         with open(f"{OUTPATH}/ocr.json", 'w') as f:
             json.dump(data, f, indent=2)
